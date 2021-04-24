@@ -1,2 +1,2 @@
 # fullstackopen-2021
-Repository for submitting fullstackopen exercise
+Repository for submitting fullstackopen 2021 exercise
