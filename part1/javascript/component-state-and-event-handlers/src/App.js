@@ -1,32 +1,56 @@
+import React, { useState } from 'react'
 import './App.css';
 
-// Since props is passed to Hello component as parameter...
-// ...we can directly destructure it inside the parentheses and...
-// ...immediately assign it to a variable
-const Hello = ({name, age}) => {
-  // It is possible and easy to place function inside function in JavaScript
-  // Helper function to guess the year of birth
-  const bornYear = () => new Date().getFullYear() - age
-
+// Component responsible for displaying the counter
+// The counter state will be passed down via props from parent (App) component
+const Display = ({ counter }) => {
   return (
-    <div>
-      <p>
-        Hello {name}, you are {age} years old.
-      </p>
-      <p>So you were probably born in {bornYear()}</p>
-    </div>
+    <p>Current counter is: {counter}</p>
+  )
+}
+
+// Component responsible for handling click event
+const Button = ({ handleClick, btnText }) => {
+  return (
+    <button onClick={handleClick}>
+      {btnText}
+    </button>
   )
 }
 
 const App = () => {
-  const name = 'Peter'
-  const age = 10
+  // useState returns 2 value:
+  // counter: simple number state
+  // setCounter: function to update counter state
+  // and it also sets the initial state, in this case counter: 0
+  // state variables are preserved by react even when the function exits
+  // The state is shared between the parent and child component
+  // THE ONLY WAY to reset state variable is by using the state modifying function (setCounter in this case)
+  const [ counter, setCounter ] = useState(0)
+
+  // Define all event handlers here
+  // Event handler is basically a function
+  const increaseCounterByOne = () => setCounter(counter + 1)
+  const resetCounter = () => setCounter(0)
+  const decreaseCounterByOne = () => setCounter(counter - 1)
+
+  console.log(`rendering ... ${counter}`)
 
   return (
     <div className="App">
-      <h1>Greetings</h1>
-      <Hello name="Maya" age={26 + 10} />
-      <Hello name={name} age={age}/>
+      <Display counter={counter} />
+      <Button 
+        handleClick={increaseCounterByOne} 
+        btnText={'Increment'} 
+      />
+      <Button 
+        handleClick={resetCounter} 
+        btnText={'Reset'} 
+      />
+      <Button 
+        handleClick={decreaseCounterByOne} 
+        btnText={'Decrement'} 
+      />
     </div>
   )
 }
