@@ -15,11 +15,39 @@ const SectionTitle = (props) => {
   )
 }
 // Component for rendering the feedback statistics
-const Display = (props) => {
+const Statistic = (props) => {
   return (
-    <p className="section-content">{props.text} {props.count}</p>
+    <tr>
+      <td>{props.text}</td>
+      <td>{props.count}</td>
+    </tr>
   )
 }
+// Component for bundling the single statistic (Display component) part
+const Statistics = (props) => {
+  // Only display detailed statistics once feedback has been gathered
+  if (calculateTotalFeedback(props.feedback) === 0) {
+    return (
+      <p className="section-content">No feedback given</p>
+    )
+  } 
+
+  return (
+    <div>
+      <table>
+        <tbody className="section-content">
+          <Statistic text="Good" count={props.feedback.good} />
+          <Statistic text="Neutral" count={props.feedback.neutral} />
+          <Statistic text="Bad" count={props.feedback.bad} />
+          <Statistic text="All" count={calculateTotalFeedback(props.feedback)} />
+          <Statistic text="Average" count={calculateAverageFeedback(props.feedback)} />
+          <Statistic text="Positive" count={calculatePositiveFeedbackPercentage(props.feedback).toString() + "%"} /> 
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
 
 
 // Helper function for process the feedback
@@ -92,13 +120,7 @@ const App = () => {
       <Button handleClick={resetFeedback} btnText="Reset" />
 
       <SectionTitle sectionTitle="Statistics" />
-      <Display text="Good" count={feedback.good} />
-      <Display text="Neutral" count={feedback.neutral} />
-      <Display text="Bad" count={feedback.bad} />
-      <Display text="All" count={calculateTotalFeedback(feedback)} />
-      <Display text="Average" count={calculateAverageFeedback(feedback)} />
-      {/** Percentage of positive feedback */}
-      <Display text="Positive" count={calculatePositiveFeedbackPercentage(feedback).toString() + "%"} /> 
+      <Statistics feedback={feedback} />
     </div>
   )
 }
