@@ -7,15 +7,16 @@ const Content = ({ course }) => {
     part => <Part key={part.id} exerciseTitle={part.name} exerciseCount={part.exercises} />
   )
 
-  let totalExercises = 0
-  course.parts.forEach(part => totalExercises += part.exercises)
-
-  // TODO count total exercises with .reduce()
+  const accumulatedParts = course.parts.reduce((accumulator, currentValue) => {
+    const newPart = {...accumulator}
+    newPart.exercises += currentValue.exercises
+    return newPart
+  })
 
   return (
     <div>
       {courseParts}
-      <p>Total of {totalExercises} exercises</p>
+      <p>Total of {accumulatedParts.exercises} exercises</p>
     </div>
   )
 };
