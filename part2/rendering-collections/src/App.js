@@ -9,11 +9,13 @@ const App = (props) => {
   const [newNote, setNewNote] = useState(
     'enter new note...'
   )
+  const [showAll, setShowAll] = useState(true) // Initially, all notes are shown
 
   // Array of react elements, with 'li' as its base element
   // a tag inside an array (regardless of array count) must have 'key' attribute
   // Note component below is inside an array (generate by .map), therefore 'key' attribute is mandatory
-  const notesListItem = notes.map(note => <Note key={note.id} note={note} />)
+  const notesToShow = showAll ? notes : notes.filter(note => note.important)
+  const notesListItem = notesToShow.map(note => <Note key={note.id} note={note} />)
 
   // Function called when submitting the form
   const addNote = (event) => {
@@ -36,9 +38,17 @@ const App = (props) => {
     setNewNote(event.target.value)
   }
 
+  // Function called when toggling show all/ important notes button
+  const handleShowNotes = () => {
+    setShowAll(!showAll)
+  }
+
   return (
     <div className='App'>
       <h1>Notes</h1>
+      <button onClick={handleShowNotes}>
+        Show {showAll ? 'important' : 'all'} notes
+      </button>
       <ul>
         {notesListItem}
       </ul>
