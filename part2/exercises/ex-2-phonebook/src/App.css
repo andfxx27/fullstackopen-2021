@@ -1,0 +1,28 @@
+html {
+  font-family: sans-serif;
+}
+
+body {
+  padding: 8px;
+}
+
+button {
+  margin-top: 8px;
+  padding: 2px 8px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+input {
+  padding: 8px;
+}
+
+.form {
+  padding: 8px;
+  width: 270px;
+  border: .5px solid rgba(77, 77, 77, 0.4);
+  border-radius: 4px;
+}
