@@ -2,6 +2,10 @@ html {
   font-family: sans-serif;
 }
 
+hr {
+  border: .5px solid rgba(0, 0, 0, .2);
+}
+
 body {
   padding: 8px;
 }
@@ -13,7 +17,7 @@ button {
 
 label {
   display: block;
-  margin-bottom: 8px;
+  margin: 8px 0;
 }
 
 input {
@@ -23,6 +27,6 @@ input {
 .form {
   padding: 8px;
   width: 270px;
-  border: .5px solid rgba(77, 77, 77, 0.4);
+  border: .5px solid rgba(77, 77, 77, .4);
   border-radius: 4px;
 }
