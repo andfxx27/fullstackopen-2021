@@ -9,7 +9,6 @@ import '../App.css'
  * @returns JSX
  */
 const Form = (props) => {
-  console.log(props)
   return (
     <>
       <h2>Add new phonebook entry</h2>
