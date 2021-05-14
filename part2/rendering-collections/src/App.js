@@ -66,6 +66,13 @@ const App = () => {
           }
         ))
       })
+      .catch(error => {
+        console.log(error)
+        alert(`The note with id ${id} was already deleted from the server`)
+
+        // Remove invalid note object from the notes state
+        setNotes(notes.filter(note => note.id !== id))
+      })
   }
 
   // Array of react elements, with 'li' as its base element
@@ -83,7 +90,6 @@ const App = () => {
         Show {showAll ? 'important' : 'all'} notes
       </button>
       <ul>
-        {}
         {notesListItem}
       </ul>
       <form onSubmit={addNote}>
