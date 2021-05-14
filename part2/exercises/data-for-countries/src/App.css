@@ -14,3 +14,7 @@ label {
 input {
   height: 25px;
 }
+
+.flag-img {
+  width: 240px;
+}
