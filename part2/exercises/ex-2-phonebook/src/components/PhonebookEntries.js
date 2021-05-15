@@ -10,15 +10,38 @@ import '../App.css'
  */
 const PhonebookEntries = (props) => {
   let phonebookEntries = props.persons.map(
-    person => <li key={person.name}>{person.name} {person.phone}</li>
+    person => {
+      return (
+        <li key={person.name} className='note'>
+          <span>{person.name}</span>
+          <span className='margin-md'>{person.phone}</span>
+          <button 
+            className='delete-btn' 
+            onClick={() => props.onDelete(person.id)}>
+            Delete
+          </button>
+        </li>  
+      )
+    } 
   )
 
   if (props.filter !== "") {
     const filteredPersons = props.persons.filter(
-      person => person.name.includes(props.filter)
+      person => person.name.toLowerCase().includes(props.filter.toLowerCase())
     )
     phonebookEntries = filteredPersons.map(
-      person => <li key={person.name}>{person.name} {person.phone}</li>
+      person => {
+        return (
+          <li key={person.name} className='note'>
+            <span>{person.name}</span>
+            <span className='margin-md'>{person.phone}</span>
+            <button 
+              className='delete-btn' 
+              onClick={() => props.onDelete(person.id)}>Delete
+            </button>
+          </li>  
+        )
+      } 
     )
   }
 

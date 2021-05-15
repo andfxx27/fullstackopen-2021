@@ -6,6 +6,22 @@ hr {
   border: .5px solid rgba(0, 0, 0, .2);
 }
 
+/* style for notification message */
+.success {
+  color: rgb(53, 209, 53);
+}
+
+.error {
+  color: rgb(219, 53, 53);
+}
+
+/* style for notes list item */
+.note {
+  color: grey;
+  padding-top: 4px;
+  font-size: 15px;
+}
+
 body {
   padding: 8px;
 }
@@ -13,6 +29,14 @@ body {
 button {
   margin-top: 8px;
   padding: 2px 8px;
+}
+
+.margin-md {
+  margin: 0 8px;
+}
+
+.delete-btn {
+  margin-left: 8px;
 }
 
 label {

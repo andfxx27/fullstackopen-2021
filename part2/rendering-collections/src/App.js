@@ -3,13 +3,29 @@ import noteService from './services/notes'
 import './App.css'
 
 import Note from './components/Note'
+import Notification from './components/Notification'
+
+const Footer = () => {
+  // CSS styling with inline-style
+  const footerStyle = {
+    color: 'green',
+    fontStyle: 'italic',
+    fontSize: 16
+  }
+
+  return (
+    <div style={footerStyle}>
+      <br />
+      <em>Note app, Department of Computer Science, University of Helsinki {new Date().getFullYear()}</em>
+    </div>
+  )
+}
 
 const App = () => {
   const [notes, setNotes] = useState([])
-  const [newNote, setNewNote] = useState(
-    ''
-  )
+  const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true) // Initially, all notes are shown
+  const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
     noteService
@@ -68,7 +84,13 @@ const App = () => {
       })
       .catch(error => {
         console.log(error)
-        alert(`The note with id ${id} was already deleted from the server`)
+        setErrorMessage(
+          `Note ${note.content} was already removed from the server`
+        )
+        setTimeout(() => {
+          console.log('Timer started before error message disappear')
+          setErrorMessage(null)
+        }, 5000)
 
         // Remove invalid note object from the notes state
         setNotes(notes.filter(note => note.id !== id))
@@ -86,6 +108,7 @@ const App = () => {
   return (
     <div className='App'>
       <h1>Notes</h1>
+      <Notification message={errorMessage} />
       <button onClick={handleShowNotes}>
         Show {showAll ? 'important' : 'all'} notes
       </button>
@@ -99,6 +122,8 @@ const App = () => {
         />
         <button type='submit'>Add</button>
       </form>
+
+      <Footer />
     </div>
   )
 }
