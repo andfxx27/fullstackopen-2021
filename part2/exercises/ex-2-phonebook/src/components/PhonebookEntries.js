@@ -17,7 +17,7 @@ const PhonebookEntries = (props) => {
           <span className='margin-md'>{person.phone}</span>
           <button 
             className='delete-btn' 
-            onClick={() => props.onDelete(person.id)}>
+            onClick={() => props.onDelete(person._id)}>
             Delete
           </button>
         </li>  

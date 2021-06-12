@@ -85,10 +85,9 @@ const App = () => {
       .catch(error => {
         console.log(error)
         setErrorMessage(
-          `Note ${note.content} was already removed from the server`
+          `Note "${note.content}" was already removed from the server`
         )
         setTimeout(() => {
-          console.log('Timer started before error message disappear')
           setErrorMessage(null)
         }, 5000)
 

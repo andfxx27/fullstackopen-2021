@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseURL = 'http://localhost:3001/notes'
+const baseURL = 'https://sheltered-reef-55888.herokuapp.com/rest/notes'
 
 const getAll = () => {
   // Both .get and .then from axios returns a promise

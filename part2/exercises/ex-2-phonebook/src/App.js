@@ -26,12 +26,12 @@ const App = () => {
       if (window.confirm(`${newName} is already added to the phonebook, replace the old number with a new one?`)) {
         let existingPerson = persons.find(person => person.name === newName)
         personService
-          .updatePhoneNumber(existingPerson.id, {...existingPerson, phone: person.phone})
+          .updatePhoneNumber(existingPerson._id, {...existingPerson, phone: person.phone})
           .then(response => {
             console.log(response)
             setPersons(persons.map(
               person => {
-                if (person.id === response.data.id) {
+                if (person._id === response.data._id) {
                   return response.data
                 }
 
@@ -86,7 +86,7 @@ const App = () => {
         .deleteByID(id)
         .then(response => {
           setPersons(persons.filter(
-            person => person.id !== id
+            person => person._id !== id
           ))
         })
         .catch(error => {
