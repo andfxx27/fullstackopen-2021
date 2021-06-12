@@ -1,0 +1,7 @@
+POST http://localhost:3001/rest/notes
+Content-Type: application/json
+
+{
+    "content": "sent from vscode rest client",
+    "important": false
+}

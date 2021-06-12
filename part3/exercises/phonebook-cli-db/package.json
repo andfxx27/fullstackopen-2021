@@ -1,0 +1,14 @@
+{
+  "name": "phonebook-cli-db",
+  "version": "1.0.0",
+  "description": "CLI application to simulate DB connection for phonebook react-app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Felix Andersen",
+  "license": "MIT",
+  "dependencies": {
+    "mongoose": "^5.12.11"
+  }
+}
