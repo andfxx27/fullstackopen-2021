@@ -1,8 +1,17 @@
 const mongoose = require('mongoose')
 
+// Schema with specific validation rules
 const personSchema = new mongoose.Schema({
-  name: String,
-  phone: String
+  name: {
+    type: String,
+    minLength: 1,
+    required: true
+  },
+  phone: {
+    type: String,
+    minLength: 10,
+    required: true
+  }
 })
 
 // personSchema.set('toJSON', {

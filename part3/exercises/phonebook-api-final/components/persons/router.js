@@ -10,8 +10,8 @@ router.get('/people', (request, response, next) => {
   .then(result => {
       console.log(result)
       response.json(result)
-    })
-    .catch(error => next(error))
+  })
+  .catch(error => next(error))
 })
 
 router.get('/people/:id', (request, response, next) => {
@@ -32,6 +32,12 @@ router.get('/people/:id', (request, response, next) => {
 })
 
 router.post('/people', (request, response, next) => {
+  if (!request.body.name || !request.body.phone) {
+    return response.status(400).json({
+      error: 'required: [name, phone]'
+    })
+  }
+
   const person = {
     name: request.body.name,
     phone: request.body.phone
@@ -40,9 +46,12 @@ router.post('/people', (request, response, next) => {
   new personModel(person)
   .save()
   .then(result => {
-    response.json(result)
+    return result.toJSON() // Explicitly calling .toJSON() in promise chaining
   })
-  .catch(error => next(error))
+  .then(result => {
+    response.json(result) // Usually .toJSON() will be called here before being sent as response
+  })
+  .catch(error => next(error)) // Will also catch error caused by built-in mongoose schema validator
 })
 
 router.put('/people/:id', (request, response, next) => {
