@@ -1,0 +1,27 @@
+.btn {
+  background-color: cadetblue;
+  border: none;
+  color: aliceblue;
+  display: block;
+  margin-bottom: 8px;
+  padding: 4px;
+  width: 100px;
+}
+
+.btn:hover {
+  pointer-events: visible;
+}
+
+.margin-bt-md {
+  margin-bottom: 16px;
+}
+
+.counter {
+  background-color: aliceblue;
+  padding: 8px;
+}
+
+.clickable-counter {
+  border: 1px solid black;
+  padding: 8px;
+}
