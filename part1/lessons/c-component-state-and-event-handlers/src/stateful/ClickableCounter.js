@@ -2,6 +2,20 @@ import React, { useState } from "react";
 
 import "../styles.css";
 
+// Immediately destructure props.counter on the function parameter
+const Button = ({ onClick, text }) => (
+  <button className="btn" onClick={onClick}>
+    {text}
+  </button>
+);
+
+const DisplayCounter = ({ counter }) => (
+  <>
+    <h2>Clickable counter</h2>
+    <p>Current count is {counter}.</p>
+  </>
+);
+
 const ClickableCounter = () => {
   const [counter, setCounter] = useState(0);
 
@@ -14,17 +28,17 @@ const ClickableCounter = () => {
     setCounter(0);
   };
 
+  const decrementCount = () => {
+    setCounter(counter - 1);
+  };
+
   return (
     <div className="clickable-counter margin-bt-md">
-      <h2>Clickable counter</h2>
-      <p>Current count is {counter}.</p>
+      <DisplayCounter counter={counter} />
 
-      <button className="btn" onClick={incrementCount}>
-        Count
-      </button>
-      <button className="btn" onClick={resetCount}>
-        Reset
-      </button>
+      <Button onClick={incrementCount} text="Increment" />
+      <Button onClick={resetCount} text="Reset" />
+      <Button onClick={decrementCount} text="Decrement" />
     </div>
   );
 };
