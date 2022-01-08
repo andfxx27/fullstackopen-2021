@@ -11,6 +11,7 @@ const App = (props) => {
   //-it means App component now controll the behavior of the input element
   // An onChange handler is needed to synchronize the typed value with component's state
   const [newNote, setNewNote] = useState("");
+  const [showAll, setShowAll] = useState(true);
 
   const addNewNote = (event) => {
     // Prevents default action of submitting form, one of which cause the page to reload
@@ -30,9 +31,20 @@ const App = (props) => {
     setNewNote(event.target.value);
   };
 
+  const handleToggleShowAll = () => {
+    setShowAll(!showAll);
+  };
+
+  const notesToShow = showAll ? notes : notes.filter((note) => note.important);
+
   return (
     <div>
       <h1>Notes</h1>
+      {/* Button to toggle whether to show all or only important notes */}
+      <button onClick={handleToggleShowAll}>
+        Show {showAll ? "important" : "all"}.
+      </button>
+
       {/* Form for adding new note */}
       <form onSubmit={addNewNote}>
         <input
@@ -44,7 +56,7 @@ const App = (props) => {
       </form>
 
       <ul>
-        {notes.map((note) => {
+        {notesToShow.map((note) => {
           return <Note key={note.id} note={note} />;
         })}
       </ul>
