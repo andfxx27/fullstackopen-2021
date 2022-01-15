@@ -1,12 +1,5 @@
-import React, { useState } from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Form from "./components/Form";
 import Search from "./components/Search";
 import "./App.css";
@@ -14,16 +7,16 @@ import Phonebook from "./components/Phonebook";
 
 // TODO extract into its own components: search filter, phonebook form, phonebook list
 const App = () => {
-  const [persons, setPersons] = useState([
-    { name: "Felix", phone: "0812-9387-2485" },
-    { name: "Ayaka", phone: "1122-9387-2485" },
-    { name: "Childe", phone: "0812-1234-2485" },
-    { name: "Xiao", phone: "0812-9387-8900" },
-    { name: "Eula", phone: "0812-3409-2485" },
-  ]);
+  const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newPhone, setNewPhone] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(async () => {
+    const result = await axios.get("http://localhost:3001/persons");
+    const persons = result.data;
+    setPersons(persons);
+  }, []);
 
   const resetComponentState = () => {
     setNewName("");
